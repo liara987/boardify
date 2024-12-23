@@ -11,8 +11,8 @@ const AuthLayout = ({ children }: AuthLayoutProps) => {
         <nav className="flex justify-between items-center">
           <Image
             src="/logo.png"
-            height={100}
-            width={100}
+            height={50}
+            width={50}
             alt="logo with a blue rocket and the text boardify"
           />
           <Button variant={"secondary"}>Sign Up</Button>

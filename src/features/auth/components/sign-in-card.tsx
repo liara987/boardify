@@ -1,7 +1,9 @@
-import { z } from "zod";
-import { FcGoogle } from "react-icons/fc";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
 import { FaGithub } from "react-icons/fa";
-import { DottedSeparator } from "@/components/dotted-separator";
+import { FcGoogle } from "react-icons/fc";
+import { z } from "zod";
+
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
@@ -12,8 +14,8 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
+
+import { DottedSeparator } from "@/components/dotted-separator";
 
 const formSchema = z.object({
   email: z.string().email("This email is invalid"),
@@ -49,11 +51,7 @@ export const SignInCard = () => {
               render={({ field }) => (
                 <FormItem>
                   <FormControl>
-                    <Input
-                      {...field}
-                      type="email"
-                      placeholder="Enter email address here"
-                    />
+                    <Input {...field} type="email" placeholder="Email" />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -68,14 +66,14 @@ export const SignInCard = () => {
                     <Input
                       {...field}
                       type="password"
-                      placeholder="Enter password here"
+                      placeholder="Password"
                       max={256}
                     />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
               )}
-            ></FormField>
+            />
             <Button disabled={false} size={"lg"} className="w-full">
               Login
             </Button>
