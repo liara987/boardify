@@ -16,6 +16,7 @@ import {
 import { Input } from "@/components/ui/input";
 
 import { DottedSeparator } from "@/components/dotted-separator";
+import Link from "next/link";
 
 const formSchema = z.object({
   email: z.string().email("This email is invalid"),
@@ -102,6 +103,15 @@ export const SignInCard = () => {
             Login with Github
           </Button>
         </CardContent>
+      </CardContent>
+      <div className="px-7">
+        <DottedSeparator />
+      </div>
+      <CardContent className="p-7 flex items-center justify-center">
+        <p>Don&apos;t have an account?</p>
+        <Link href={"/sign-up"}>
+          <span className="text-blue-700">&nbsp;Sign Up</span>
+        </Link>
       </CardContent>
     </Card>
   );
