@@ -17,13 +17,12 @@ import { Input } from "@/components/ui/input";
 
 import { DottedSeparator } from "@/components/dotted-separator";
 import Link from "next/link";
+import { useLogin } from "../api/use-login";
 import { loginSchema } from "../schemas";
 
-const onSubmit = (value: z.infer<typeof loginSchema>) => {
-  console.log(value);
-};
-
 export const SignInCard = () => {
+  const { mutate } = useLogin();
+
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
     defaultValues: {
@@ -31,6 +30,11 @@ export const SignInCard = () => {
       password: "",
     },
   });
+
+  const onSubmit = (values: z.infer<typeof loginSchema>) => {
+    mutate({ json: values });
+  };
+
   return (
     <Card className="w-full h-full md:w-[487px] border-none shadow-none">
       <CardHeader className="flex items-center justify-center text-center p-7">

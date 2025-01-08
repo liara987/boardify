@@ -24,26 +24,25 @@ import {
 import { Input } from "@/components/ui/input";
 import { FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-
-const formSchema = z.object({
-  name: z.string().trim().min(1, "User name is required"),
-  email: z.string().email("This email is invalid"),
-  password: z.string().min(8, "Minimum of 8 characters is required"),
-});
-
-const onSubmit = (value: z.infer<typeof formSchema>) => {
-  console.log(value);
-};
+import { useRegister } from "../api/use-register";
+import { registerSchema } from "../schemas";
 
 export const SignUpCard = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const { mutate } = useRegister();
+
+  const form = useForm<z.infer<typeof registerSchema>>({
+    resolver: zodResolver(registerSchema),
     defaultValues: {
       name: "",
       email: "",
       password: "",
     },
   });
+
+  const onSubmit = (values: z.infer<typeof registerSchema>) => {
+    mutate({ json: values });
+  };
+
   return (
     <Card className="w-full h-full md:w-[487px] border-none shadow-none">
       <CardHeader className="flex items-center justify-center text-center p-7">
