@@ -17,19 +17,15 @@ import { Input } from "@/components/ui/input";
 
 import { DottedSeparator } from "@/components/dotted-separator";
 import Link from "next/link";
+import { loginSchema } from "../schemas";
 
-const formSchema = z.object({
-  email: z.string().email("This email is invalid"),
-  password: z.string().min(1, "Password is required"),
-});
-
-const onSubmit = (value: z.infer<typeof formSchema>) => {
+const onSubmit = (value: z.infer<typeof loginSchema>) => {
   console.log(value);
 };
 
 export const SignInCard = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
-    resolver: zodResolver(formSchema),
+  const form = useForm<z.infer<typeof loginSchema>>({
+    resolver: zodResolver(loginSchema),
     defaultValues: {
       email: "",
       password: "",
